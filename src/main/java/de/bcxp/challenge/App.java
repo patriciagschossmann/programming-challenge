@@ -38,8 +38,9 @@ public final class App {
 
       String weatherFileFormat = prop.getProperty("weather.fileFormat");
       String weatherSrcPath = prop.getProperty("weather.srcPath");
+      char weatherSeparator = prop.getProperty("weather.separator").charAt(0);
 
-      WeatherController weatherController = AppFactory.buildWeatherController(weatherFileFormat, weatherSrcPath);
+      WeatherController weatherController = AppFactory.buildWeatherController(weatherFileFormat, weatherSrcPath, weatherSeparator);
       weatherController.printDayWithSmallestTempSpread();
 
       // String dayWithSmallestTempSpread = "Someday"; // Your day analysis function

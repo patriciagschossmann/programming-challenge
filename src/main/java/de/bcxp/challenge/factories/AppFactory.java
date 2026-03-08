@@ -16,11 +16,11 @@ import de.bcxp.challenge.weather.WeatherServiceImpl;
 public class AppFactory {
   private static final Logger logger = Logger.getLogger(AppFactory.class.getName());
 
-  public static WeatherController buildWeatherController(String fileFormat, String srcPath) {
+  public static WeatherController buildWeatherController(String fileFormat, String srcPath, char separator) {
     WeatherDataLoader weatherDataLoader;
     switch (fileFormat) {
       case "csv":
-        weatherDataLoader = new WeatherCSVLoader(srcPath);
+        weatherDataLoader = new WeatherCSVLoader(srcPath, separator);
         break;
       default:
         String errMsg = "Unsupported file format: " + fileFormat + ". Supported: csv";
