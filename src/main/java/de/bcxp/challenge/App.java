@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 import de.bcxp.challenge.factories.AppFactory;
 import de.bcxp.challenge.weather.WeatherController;
+import de.bcxp.challenge.countries.CountryController;
 
 public final class App {
 
@@ -48,15 +49,21 @@ public final class App {
       // System.out.printf("Day with smallest temperature spread: %s%n",
       // dayWithSmallestTempSpread);
 
+      String countriesFileFormat = prop.getProperty("countries.fileFormat");
+      String countriesSrcPath = prop.getProperty("countries.srcPath");
+      char countriesSeparator = prop.getProperty("countries.separator").charAt(0);
+
+      CountryController countryController = AppFactory.buildCountryController(countriesFileFormat, countriesSrcPath, countriesSeparator);
+      countryController.printCountryWithHighestPopulationDensity();
+
+      // String countryWithHighestPopulationDensity = "Some country"; // Your
+      // population density analysis function call …
+      // System.out.printf("Country with highest population density: %s%n",
+      // countryWithHighestPopulationDensity);
     } catch (IOException e) {
       String errMsg = "Could not load config file";
       logger.log(Level.SEVERE, errMsg, e);
       throw new IllegalStateException(errMsg, e);
     }
-    
-    // String countryWithHighestPopulationDensity = "Some country"; // Your
-    // population density analysis function call …
-    // System.out.printf("Country with highest population density: %s%n",
-    // countryWithHighestPopulationDensity);
   }
 }
