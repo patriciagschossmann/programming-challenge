@@ -32,3 +32,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Neovim ###
+.classpath
+.project
+.settings/
