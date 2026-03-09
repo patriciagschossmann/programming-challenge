@@ -1,13 +1,14 @@
 package de.bcxp.challenge.shared;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public abstract class DataLoader<T> {
-  protected String srcPath;
+  protected List<String[]> lines;
 
-  public DataLoader(String srcPath) {
-    this.srcPath = srcPath;
+  public DataLoader(Supplier<List<String[]>> source) {
+    this.lines = source.get();
   }
-  
+
   public abstract List<T> load();
 }

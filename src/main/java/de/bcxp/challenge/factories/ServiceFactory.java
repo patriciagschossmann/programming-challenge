@@ -34,7 +34,7 @@ public class ServiceFactory {
     switch (fileFormat) {
       case ConfigKeys.SupportedFormat.CSV:
         char separator = config.get(ConfigKeys.WeatherConfig.CSV_SEPARATOR).charAt(0);
-        weatherDataLoader = new WeatherCSVLoader(srcPath, separator);
+        weatherDataLoader = WeatherCSVLoader.fromCSV(srcPath, separator);
         break;
       default:
         String errMsg = "Unsupported file format: " + fileFormat + ". Supported: csv";
@@ -57,7 +57,7 @@ public class ServiceFactory {
     switch (fileFormat) {
       case ConfigKeys.SupportedFormat.CSV:
         char separator = config.get(ConfigKeys.CountriesConfig.CSV_SEPARATOR).charAt(0);
-        countryDataLoader = new CountryCSVLoader(srcPath, separator);
+        countryDataLoader = CountryCSVLoader.fromCSV(srcPath, separator);
         break;
       default:
         String errMsg = "Unsupported file format: " + fileFormat + ". Supported: csv";

@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import java.util.function.BiConsumer;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,30 +19,38 @@ import com.opencsv.exceptions.CsvValidationException;;
 public class OpenCSVParser {
   private static final Logger logger = Logger.getLogger(OpenCSVParser.class.getName());
 
-  public static void parseByLine(String filePath, char separator, BiConsumer<Integer, String[]> lineHandler) {
+  private static InputStream openStream(String filePath) {
+    InputStream stream = OpenCSVParser.class.getClassLoader().getResourceAsStream(filePath);
+    if (stream == null)
+      throw new IllegalStateException("CSV file not found: " + filePath);
+    return stream;
+  }
+
+  public static List<String[]> parseByLine(String filePath, char separator) {
     CSVParser parser = new CSVParserBuilder()
         .withSeparator(separator)
         .build();
 
+    List<String[]> lines = new ArrayList<>();
+
     try (
-        InputStream stream = OpenCSVParser.class.getClassLoader().getResourceAsStream(filePath);
+        InputStream stream = openStream(filePath);
         InputStreamReader inputStreamReader = new InputStreamReader(stream);
         CSVReader reader = new CSVReaderBuilder(inputStreamReader)
-                .withCSVParser(parser)
-                .build()
-    ) {
+            .withCSVParser(parser)
+            .build()) {
       reader.readNext(); // skip header
 
-      int lineNumber = 2; // data starts at line 2
       String[] line;
       while ((line = reader.readNext()) != null) {
-        lineHandler.accept(lineNumber, line);
-        lineNumber++;
+        lines.add(line);
       }
     } catch (IOException | CsvValidationException e) {
       String errMsg = "Could not parse csv file: " + filePath;
       logger.log(Level.SEVERE, errMsg, e.getMessage());
       throw new IllegalStateException(errMsg, e);
     }
+
+    return lines;
   }
 }
