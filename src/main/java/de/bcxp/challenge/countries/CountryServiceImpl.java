@@ -15,7 +15,7 @@ public class CountryServiceImpl implements CountryService {
 
   public String getCountryWithHighestPopulationDensity() {
     return countryRepository.findAll().stream()
-        .max(Comparator.comparingInt(c -> c.getPopulation() * c.getAreaSqKm()))
+        .max(Comparator.comparingInt(c -> c.getPopulation() / c.getAreaSqKm()))
         .map(c -> c.getName())
         .orElseThrow(() -> {
           String errMsg = "No countries data available";
