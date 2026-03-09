@@ -1,33 +1,39 @@
 package de.bcxp.challenge.factories;
 
 import java.lang.UnsupportedOperationException;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import de.bcxp.challenge.countries.CountryController;
+import de.bcxp.challenge.config.AppConfig;
+import de.bcxp.challenge.config.ConfigKeys;
+
+import de.bcxp.challenge.countries.Country;
 import de.bcxp.challenge.countries.CountryCSVLoader;
-import de.bcxp.challenge.countries.CountryDataLoader;
 import de.bcxp.challenge.countries.CountryRepository;
 import de.bcxp.challenge.countries.CountryRepositoryImpl;
 import de.bcxp.challenge.countries.CountryService;
 import de.bcxp.challenge.countries.CountryServiceImpl;
 
-import de.bcxp.challenge.weather.WeatherController;
+import de.bcxp.challenge.shared.DataLoader;
+
+import de.bcxp.challenge.weather.Weather;
 import de.bcxp.challenge.weather.WeatherCSVLoader;
-import de.bcxp.challenge.weather.WeatherDataLoader;
 import de.bcxp.challenge.weather.WeatherRepository;
 import de.bcxp.challenge.weather.WeatherRepositoryImpl;
 import de.bcxp.challenge.weather.WeatherService;
 import de.bcxp.challenge.weather.WeatherServiceImpl;
 
-public class AppFactory {
-  private static final Logger logger = Logger.getLogger(AppFactory.class.getName());
+public class ServiceFactory {
+  private static final Logger logger = Logger.getLogger(ServiceFactory.class.getName());
 
-  public static WeatherController buildWeatherController(String fileFormat, String srcPath, char separator) {
-    WeatherDataLoader weatherDataLoader;
+  public static WeatherService buildWeatherService(AppConfig config) {
+    String fileFormat = config.get(ConfigKeys.WeatherConfig.FILE_FORMAT);
+    String srcPath = config.get(ConfigKeys.WeatherConfig.SRC_PATH);
+
+    DataLoader<Weather> weatherDataLoader;
     switch (fileFormat) {
-      case "csv":
+      case ConfigKeys.SupportedFormat.CSV:
+        char separator = config.get(ConfigKeys.WeatherConfig.CSV_SEPARATOR).charAt(0);
         weatherDataLoader = new WeatherCSVLoader(srcPath, separator);
         break;
       default:
@@ -40,15 +46,17 @@ public class AppFactory {
 
     WeatherService weatherService = new WeatherServiceImpl(weatherRepository);
 
-    WeatherController weatherController = new WeatherController(weatherService);
-
-    return weatherController;
+    return weatherService;
   }
 
-  public static CountryController buildCountryController(String fileFormat, String srcPath, char separator) {
-    CountryDataLoader countryDataLoader;
+  public static CountryService buildCountryService(AppConfig config) {
+    String fileFormat = config.get(ConfigKeys.CountriesConfig.FILE_FORMAT);
+    String srcPath = config.get(ConfigKeys.CountriesConfig.SRC_PATH);
+
+    DataLoader<Country> countryDataLoader;
     switch (fileFormat) {
-      case "csv":
+      case ConfigKeys.SupportedFormat.CSV:
+        char separator = config.get(ConfigKeys.CountriesConfig.CSV_SEPARATOR).charAt(0);
         countryDataLoader = new CountryCSVLoader(srcPath, separator);
         break;
       default:
@@ -61,8 +69,6 @@ public class AppFactory {
 
     CountryService countryService = new CountryServiceImpl(countryRepository);
 
-    CountryController countryController = new CountryController(countryService);
-
-    return countryController;
+    return countryService;
   }
 }

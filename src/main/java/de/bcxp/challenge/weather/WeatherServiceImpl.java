@@ -13,7 +13,7 @@ public class WeatherServiceImpl implements WeatherService {
     this.weatherRepository = weatherRepository;
   }
 
-  public int getDayWithSmallestTempSpread() {
+  public String getDayWithSmallestTempSpread() {
     return weatherRepository.findAll().stream()
         .min(Comparator.comparingInt(w -> w.getMaxTempF() - w.getMinTempF()))
         .map(w -> w.getDay())

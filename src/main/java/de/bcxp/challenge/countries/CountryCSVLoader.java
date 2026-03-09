@@ -7,11 +7,16 @@ import java.util.logging.Logger;
 
 import de.bcxp.challenge.parser.OpenCSVParser;
 
-public class CountryCSVLoader extends CountryDataLoader {
+import de.bcxp.challenge.shared.DataLoader;
+
+public class CountryCSVLoader extends DataLoader<Country> {
+
   private static final Logger logger = Logger.getLogger(CountryCSVLoader.class.getName());
+  private char separator;
 
   public CountryCSVLoader(String srcPath, char separator) {
-    super(srcPath, separator);
+    super(srcPath);
+    this.separator = separator;
   }
 
   public List<Country> load() {

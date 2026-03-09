@@ -2,11 +2,13 @@ package de.bcxp.challenge.weather;
 
 import java.util.List;
 
+import de.bcxp.challenge.shared.DataLoader;
+
 public class WeatherRepositoryImpl implements WeatherRepository {
 
   private List<Weather> weatherList;
 
-  public WeatherRepositoryImpl(WeatherDataLoader weatherDataLoader) {
+  public WeatherRepositoryImpl(DataLoader<Weather> weatherDataLoader) {
     weatherList = weatherDataLoader.load();
   }
 
