@@ -11,7 +11,7 @@ import de.bcxp.challenge.shared.DataLoader;
 class WeatherRepositoryImplTest {
 
   private WeatherRepository repositoryWith(List<Weather> data) {
-    DataLoader<Weather> stub = new DataLoader<Weather>(() -> List.of()) {
+    DataLoader<String[], Weather> stub = new DataLoader<String[], Weather>(() -> List.of()) {
       @Override
       public List<Weather> load() {
         return data;

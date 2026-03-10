@@ -39,7 +39,7 @@ public class ServiceFactory {
     String fileFormat = config.get(ConfigKeys.WeatherConfig.FILE_FORMAT);
     String srcPath = config.get(ConfigKeys.WeatherConfig.SRC_PATH);
 
-    DataLoader<Weather> weatherDataLoader;
+    DataLoader<String[], Weather> weatherDataLoader;
     switch (fileFormat) {
       case ConfigKeys.SupportedFormat.CSV:
         char separator = config.get(ConfigKeys.WeatherConfig.CSV_SEPARATOR).charAt(0);
@@ -68,7 +68,7 @@ public class ServiceFactory {
     String fileFormat = config.get(ConfigKeys.CountriesConfig.FILE_FORMAT);
     String srcPath = config.get(ConfigKeys.CountriesConfig.SRC_PATH);
 
-    DataLoader<Country> countryDataLoader;
+    DataLoader<String[], Country> countryDataLoader;
     switch (fileFormat) {
       case ConfigKeys.SupportedFormat.CSV:
         char separator = config.get(ConfigKeys.CountriesConfig.CSV_SEPARATOR).charAt(0);

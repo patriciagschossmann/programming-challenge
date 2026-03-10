@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import de.bcxp.challenge.parser.OpenCSVParser;
 import de.bcxp.challenge.shared.DataLoader;
 
-public class WeatherCSVLoader extends DataLoader<Weather> {
+public class WeatherCSVLoader extends DataLoader<String[], Weather> {
 
   private static final Logger logger = Logger.getLogger(WeatherCSVLoader.class.getName());
 

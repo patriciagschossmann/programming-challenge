@@ -8,21 +8,21 @@ import java.util.function.Supplier;
  *
  * @param <T> the domain type produced by this loader
  */
-public abstract class DataLoader<T> {
+public abstract class DataLoader<T, U> {
 
-  protected List<String[]> rows;
+  protected List<T> rows;
 
   /**
    * Creates a {@code DataLoader} by fetching raw data from the given source.
    *
    * @param source returns all data as {@code String[]} arrays
    */
-  public DataLoader(Supplier<List<String[]>> source) {
+  public DataLoader(Supplier<List<T>> source) {
     this.rows = source.get();
   }
 
   /**
    * Converts the raw data in {@link #rows} to a list of typed domain objects.
    */
-  public abstract List<T> load();
+  public abstract List<U> load();
 }

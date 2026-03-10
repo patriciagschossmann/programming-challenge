@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import de.bcxp.challenge.parser.OpenCSVParser;
 import de.bcxp.challenge.shared.DataLoader;
 
-public class CountryCSVLoader extends DataLoader<Country> {
+public class CountryCSVLoader extends DataLoader<String[], Country> {
 
   private static final Logger logger = Logger.getLogger(CountryCSVLoader.class.getName());
 

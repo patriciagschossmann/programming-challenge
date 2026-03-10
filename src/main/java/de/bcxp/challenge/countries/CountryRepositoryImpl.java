@@ -11,7 +11,7 @@ public class CountryRepositoryImpl implements CountryRepository {
    * Creates a {@code CountryRepository} by eagerly loading all country records
    * from the given {@link DataLoader} into memory.
    */
-  public CountryRepositoryImpl(DataLoader<Country> countryDataLoader) {
+  public CountryRepositoryImpl(DataLoader<String[], Country> countryDataLoader) {
     countryList = countryDataLoader.load();
   }
 

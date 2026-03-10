@@ -12,7 +12,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
    * Creates a {@code WeatherRepository} by eagerly loading all weather records
    * from the given {@link DataLoader} into memory.
    */
-  public WeatherRepositoryImpl(DataLoader<Weather> weatherDataLoader) {
+  public WeatherRepositoryImpl(DataLoader<String[], Weather> weatherDataLoader) {
     weatherList = weatherDataLoader.load();
   }
 
