@@ -23,9 +23,18 @@ import de.bcxp.challenge.weather.WeatherRepositoryImpl;
 import de.bcxp.challenge.weather.WeatherService;
 import de.bcxp.challenge.weather.WeatherServiceImpl;
 
+/**
+ * Assembles fully wired feature service instances from configuration.
+ */
 public class ServiceFactory {
   private static final Logger logger = Logger.getLogger(ServiceFactory.class.getName());
 
+  /**
+   * @param config loaded application configuration
+   * @throws IllegalStateException         if a required config key is missing
+   * @throws UnsupportedOperationException if the configured file format is not
+   *                                       supported
+   */
   public static WeatherService buildWeatherService(AppConfig config) {
     String fileFormat = config.get(ConfigKeys.WeatherConfig.FILE_FORMAT);
     String srcPath = config.get(ConfigKeys.WeatherConfig.SRC_PATH);
@@ -49,6 +58,12 @@ public class ServiceFactory {
     return weatherService;
   }
 
+  /**
+   * @param config loaded application configuration
+   * @throws IllegalStateException         if a required config key is missing
+   * @throws UnsupportedOperationException if the configured file format is not
+   *                                       supported
+   */
   public static CountryService buildCountryService(AppConfig config) {
     String fileFormat = config.get(ConfigKeys.CountriesConfig.FILE_FORMAT);
     String srcPath = config.get(ConfigKeys.CountriesConfig.SRC_PATH);

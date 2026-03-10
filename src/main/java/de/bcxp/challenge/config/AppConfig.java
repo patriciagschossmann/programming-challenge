@@ -7,6 +7,9 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Loads and provides access to application configuration properties.
+ */
 public class AppConfig {
   private static final Logger logger = Logger.getLogger(AppConfig.class.getName());
   private Properties props;
@@ -15,6 +18,11 @@ public class AppConfig {
     this.props = props;
   }
 
+  /**
+   * @param fileName path to the .properties file
+   * @throws IllegalStateException if the file is missing, unreabable, or has
+   *                               malformed encoding
+   */
   public void load(String fileName) {
     try (InputStream config = AppConfig.class.getClassLoader().getResourceAsStream(fileName)) {
 
@@ -37,6 +45,11 @@ public class AppConfig {
     }
   }
 
+  /**
+   * @param key see {@link ConfigKeys} for available keys
+   * @throws IllegalStateException if {@code key} is not present in the loaded
+   *                               properties
+   */
   public String get(String key) {
     return require(key);
   }

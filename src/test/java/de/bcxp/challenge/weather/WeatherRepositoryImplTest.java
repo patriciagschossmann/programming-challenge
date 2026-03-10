@@ -23,10 +23,9 @@ class WeatherRepositoryImplTest {
   @Test
   void findAllReturnsLoadedData() {
     List<Weather> data = List.of(
-        new Weather("1", 90, 60), // spread: 30
-        new Weather("2", 80, 75), // spread: 5
-        new Weather("3", 70, 50) // spread: 20
-    );
+        new Weather("1", 90, 60),
+        new Weather("2", 80, 75),
+        new Weather("3", 70, 50));
     WeatherRepository weatherRepository = repositoryWith(data);
 
     assertSame(data, weatherRepository.findAll());

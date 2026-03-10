@@ -2,8 +2,8 @@ package de.bcxp.challenge.weather;
 
 public class Weather {
   private String day;
-  private int maxTempF;
-  private int minTempF;
+  private int maxTempF; // Fahrenheit
+  private int minTempF; // Fahrenheit
 
   public Weather(String day, int maxTemp, int minTemp) {
     this.day = day;

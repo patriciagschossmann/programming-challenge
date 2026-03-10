@@ -23,10 +23,9 @@ class CountryRepositoryImplTest {
   @Test
   void findAllReturnsLoadedData() {
     List<Country> data = List.of(
-        new Country("Germany", 83_500_000, 357_000), // density: ~232.49
-        new Country("Monaco", 38_000, 2), // density: ~19.0k
-        new Country("Brazil", 212_600_000, 8_516_000) // density: ~26.07
-    );
+        new Country("Germany", 83_500_000, 357_000),
+        new Country("Monaco", 38_000, 2),
+        new Country("Brazil", 212_600_000, 8_516_000));
     CountryRepository countryRepository = repositoryWith(data);
 
     assertSame(data, countryRepository.findAll());

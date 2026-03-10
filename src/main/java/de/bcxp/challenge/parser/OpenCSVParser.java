@@ -16,6 +16,10 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;;
 
+/**
+ * Utility class for parsing delimiter-separated CSV files from the classpath
+ * using OpenCSV.
+ */
 public class OpenCSVParser {
   private static final Logger logger = Logger.getLogger(OpenCSVParser.class.getName());
 
@@ -26,6 +30,13 @@ public class OpenCSVParser {
     return stream;
   }
 
+  /**
+   * Parses a classpath CSV file, skipping the header row.
+   *
+   * @param filePath  path to the CSV file
+   * @param separator field delimiter used in the file
+   * @throws IllegalStateException if the file is not found or cannot be parsed
+   */
   public static List<String[]> parseByRow(String filePath, char separator) {
     CSVParser parser = new CSVParserBuilder()
         .withSeparator(separator)
