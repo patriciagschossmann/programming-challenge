@@ -11,10 +11,10 @@ class CountryCSVLoaderTest {
 
   @Test
   void loadReturnsCorrectCountryObjects() {
-    List<String[]> lines = List.of(
+    List<String[]> rows = List.of(
         new String[] { "Germany", "Berlin", "1957", "83500000", "357000", "3.8", "0.942", "96" },
         new String[] { "Monaco", "Monaco", "1993", "38000", "2", "7.1", "0.956", "0" });
-    List<Country> result = new CountryCSVLoader(() -> lines).load();
+    List<Country> result = new CountryCSVLoader(() -> rows).load();
 
     assertEquals(2, result.size());
     assertEquals("Germany", result.get(0).getName());
@@ -26,10 +26,10 @@ class CountryCSVLoaderTest {
   }
 
   @Test
-  void invalidNumberSkipsLine() {
-    List<String[]> lines = List.<String[]>of(
+  void invalidNumberSkipsRow() {
+    List<String[]> rows = List.<String[]>of(
         new String[] { "Germany", "Berlin", "1957", "notANumber", "357000", "3.8", "0.942", "96" });
-    List<Country> result = new CountryCSVLoader(() -> lines).load();
+    List<Country> result = new CountryCSVLoader(() -> rows).load();
 
     assertTrue(result.isEmpty());
   }

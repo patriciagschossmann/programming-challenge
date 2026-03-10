@@ -11,10 +11,10 @@ class WeatherCSVLoaderTest {
 
   @Test
   void loadReturnsCorrectWeatherObjects() {
-    List<String[]> lines = List.of(
+    List<String[]> rows = List.of(
         new String[] { "1", "88", "59" },
         new String[] { "2", "79", "63" });
-    List<Weather> result = new WeatherCSVLoader(() -> lines).load();
+    List<Weather> result = new WeatherCSVLoader(() -> rows).load();
 
     assertEquals(2, result.size());
     assertEquals("1", result.get(0).getDay());
@@ -26,10 +26,10 @@ class WeatherCSVLoaderTest {
   }
 
   @Test
-  void invalidDataSkipsLine() {
-    List<String[]> lines = List.<String[]>of(
+  void invalidDataSkipsRow() {
+    List<String[]> rows = List.<String[]>of(
         new String[] { "1", "notANumber", "59" });
-    List<Weather> result = new WeatherCSVLoader(() -> lines).load();
+    List<Weather> result = new WeatherCSVLoader(() -> rows).load();
 
     assertTrue(result.isEmpty());
   }

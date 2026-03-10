@@ -18,17 +18,17 @@ public class WeatherCSVLoader extends DataLoader<Weather> {
   }
 
   public static WeatherCSVLoader fromCSV(String srcPath, char separator) {
-    return new WeatherCSVLoader(() -> OpenCSVParser.parseByLine(srcPath, separator));
+    return new WeatherCSVLoader(() -> OpenCSVParser.parseByRow(srcPath, separator));
   }
 
   public List<Weather> load() {
     List<Weather> weatherList = new ArrayList<>();
-    for (int i = 0; i < lines.size(); i++) {
+    for (int i = 0; i < rows.size(); i++) {
       try {
-        String[] line = lines.get(i);
-        weatherList.add(new Weather(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2])));
+        String[] row = rows.get(i);
+        weatherList.add(new Weather(row[0], Integer.parseInt(row[1]), Integer.parseInt(row[2])));
       } catch (NumberFormatException e) {
-        logger.log(Level.WARNING, "Invalid number at line " + (i + 2) + ", skipping line.", e.getMessage());
+        logger.log(Level.WARNING, "Invalid number at row " + (i + 2) + ", skipping row.", e.getMessage());
       }
     }
     return weatherList;

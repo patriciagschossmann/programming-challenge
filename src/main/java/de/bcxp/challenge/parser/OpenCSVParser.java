@@ -26,12 +26,12 @@ public class OpenCSVParser {
     return stream;
   }
 
-  public static List<String[]> parseByLine(String filePath, char separator) {
+  public static List<String[]> parseByRow(String filePath, char separator) {
     CSVParser parser = new CSVParserBuilder()
         .withSeparator(separator)
         .build();
 
-    List<String[]> lines = new ArrayList<>();
+    List<String[]> rows = new ArrayList<>();
 
     try (
         InputStream stream = openStream(filePath);
@@ -41,9 +41,9 @@ public class OpenCSVParser {
             .build()) {
       reader.readNext(); // skip header
 
-      String[] line;
-      while ((line = reader.readNext()) != null) {
-        lines.add(line);
+      String[] row;
+      while ((row = reader.readNext()) != null) {
+        rows.add(row);
       }
     } catch (IOException | CsvValidationException e) {
       String errMsg = "Could not parse csv file: " + filePath;
@@ -51,6 +51,6 @@ public class OpenCSVParser {
       throw new IllegalStateException(errMsg, e);
     }
 
-    return lines;
+    return rows;
   }
 }

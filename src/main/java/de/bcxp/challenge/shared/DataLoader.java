@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public abstract class DataLoader<T> {
-  protected List<String[]> lines;
+
+  protected List<String[]> rows;
 
   public DataLoader(Supplier<List<String[]>> source) {
-    this.lines = source.get();
+    this.rows = source.get();
   }
 
   public abstract List<T> load();

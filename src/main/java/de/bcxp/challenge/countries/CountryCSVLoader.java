@@ -18,17 +18,17 @@ public class CountryCSVLoader extends DataLoader<Country> {
   }
 
   public static CountryCSVLoader fromCSV(String srcPath, char separator) {
-    return new CountryCSVLoader(() -> OpenCSVParser.parseByLine(srcPath, separator));
+    return new CountryCSVLoader(() -> OpenCSVParser.parseByRow(srcPath, separator));
   }
 
   public List<Country> load() {
     List<Country> countryList = new ArrayList<>();
-    for (int i = 0; i < lines.size(); i++) {
+    for (int i = 0; i < rows.size(); i++) {
       try {
-        String[] line = lines.get(i);
-        countryList.add(new Country(line[0], Integer.parseInt(line[3]), Integer.parseInt(line[4])));
+        String[] row = rows.get(i);
+        countryList.add(new Country(row[0], Integer.parseInt(row[3]), Integer.parseInt(row[4])));
       } catch (NumberFormatException e) {
-        logger.log(Level.WARNING, "Invalid number at line " + (i + 2) + ", skipping line.", e.getMessage());
+        logger.log(Level.WARNING, "Invalid number at row " + (i + 2) + ", skipping row.", e.getMessage());
       }
     }
     return countryList;
