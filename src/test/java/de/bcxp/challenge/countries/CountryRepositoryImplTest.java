@@ -11,7 +11,7 @@ import de.bcxp.challenge.shared.DataLoader;
 class CountryRepositoryImplTest {
 
   private CountryRepository repositoryWith(List<Country> data) {
-    DataLoader<Country> stub = new DataLoader<Country>("srcPath") {
+    DataLoader<Country> stub = new DataLoader<Country>(() -> List.of()) {
       @Override
       public List<Country> load() {
         return data;
